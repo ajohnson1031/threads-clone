@@ -25,4 +25,14 @@ const updateUser = async ({ userId, username, name, bio, image, path }: Params):
   }
 };
 
-export { updateUser };
+const fetchUser = async (userId: string) => {
+  try {
+    connectToDB();
+    return await User.findOne({ id: userId });
+    // .populate({ path: "communities", model: Community });
+  } catch (error: any) {
+    throw new Error(`Failed to fetch user: ${error.message}`);
+  }
+};
+
+export { fetchUser, updateUser };
