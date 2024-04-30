@@ -24,6 +24,8 @@ const PostThread = ({ userId }: { userId: string }) => {
 
   const onSubmit = async (values: z.infer<typeof ThreadValidation>) => {
     await createThread({ text: values.thread, author: userId, communityId: null, path: pathname });
+
+    router.push("/");
   };
 
   return (
