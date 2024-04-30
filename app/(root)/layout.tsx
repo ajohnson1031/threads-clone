@@ -1,8 +1,5 @@
 import "@/app/globals.css";
-import Bottombar from "@/components/shared/Bottombar";
-import LeftSidebar from "@/components/shared/LeftSidebar";
-import RightSidebar from "@/components/shared/RightSidebar";
-import Topbar from "@/components/shared/Topbar";
+import { Bottombar, LeftSidebar, RightSidebar, Topbar } from "@/components/shared";
 import { ClerkProvider } from "@clerk/nextjs";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
