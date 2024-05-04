@@ -2,15 +2,20 @@
 
 import { FilterQuery, SortOrder } from "mongoose";
 
-import Community from "@/lib/models/community.model";
-import Thread from "@/lib/models/thread.model";
-import User from "@/lib/models/user.model";
+import Community from "../models/community.model";
+import Thread from "../models/thread.model";
+import User from "../models/user.model";
 
 import { connectToDB } from "./mongoose";
 
-const createCommunity = async (
-  { id, name, username, image, bio, createdById }: { id: string; name: string; username: string; image: string; bio: string; createdById: string } // Change the parameter name to reflect it's an id
-) => {
+export async function createCommunity(
+  id: string,
+  name: string,
+  username: string,
+  image: string,
+  bio: string,
+  createdById: string // Change the parameter name to reflect it's an id
+) {
   try {
     connectToDB();
 
@@ -42,9 +47,9 @@ const createCommunity = async (
     console.error("Error creating community:", error);
     throw error;
   }
-};
+}
 
-const fetchCommunityDetails = async (id: string) => {
+export async function fetchCommunityDetails(id: string) {
   try {
     connectToDB();
 
@@ -63,9 +68,9 @@ const fetchCommunityDetails = async (id: string) => {
     console.error("Error fetching community details:", error);
     throw error;
   }
-};
+}
 
-const fetchCommunityPosts = async (id: string) => {
+export async function fetchCommunityPosts(id: string) {
   try {
     connectToDB();
 
@@ -96,9 +101,9 @@ const fetchCommunityPosts = async (id: string) => {
     console.error("Error fetching community posts:", error);
     throw error;
   }
-};
+}
 
-const fetchCommunities = async ({
+export async function fetchCommunities({
   searchString = "",
   pageNumber = 1,
   pageSize = 20,
@@ -108,7 +113,7 @@ const fetchCommunities = async ({
   pageNumber?: number;
   pageSize?: number;
   sortBy?: SortOrder;
-}) => {
+}) {
   try {
     connectToDB();
 
@@ -145,9 +150,9 @@ const fetchCommunities = async ({
     console.error("Error fetching communities:", error);
     throw error;
   }
-};
+}
 
-const addMemberToCommunity = async ({ communityId, memberId }: { communityId: string; memberId: string }) => {
+export async function addMemberToCommunity(communityId: string, memberId: string) {
   try {
     connectToDB();
 
@@ -184,9 +189,9 @@ const addMemberToCommunity = async ({ communityId, memberId }: { communityId: st
     console.error("Error adding member to community:", error);
     throw error;
   }
-};
+}
 
-const removeUserFromCommunity = async ({ userId, communityId }: { userId: string; communityId: string }) => {
+export async function removeUserFromCommunity(userId: string, communityId: string) {
   try {
     connectToDB();
 
@@ -213,9 +218,9 @@ const removeUserFromCommunity = async ({ userId, communityId }: { userId: string
     console.error("Error removing user from community:", error);
     throw error;
   }
-};
+}
 
-const updateCommunityInfo = async ({ communityId, name, username, image }: { communityId: string; name: string; username: string; image: string }) => {
+export async function updateCommunityInfo(communityId: string, name: string, username: string, image: string) {
   try {
     connectToDB();
 
@@ -232,9 +237,9 @@ const updateCommunityInfo = async ({ communityId, name, username, image }: { com
     console.error("Error updating community information:", error);
     throw error;
   }
-};
+}
 
-const deleteCommunity = async (communityId: string) => {
+export async function deleteCommunity(communityId: string) {
   try {
     connectToDB();
 
@@ -266,6 +271,4 @@ const deleteCommunity = async (communityId: string) => {
     console.error("Error deleting community: ", error);
     throw error;
   }
-};
-
-export { addMemberToCommunity, createCommunity, deleteCommunity, fetchCommunities, fetchCommunityDetails, fetchCommunityPosts, removeUserFromCommunity, updateCommunityInfo };
+}
