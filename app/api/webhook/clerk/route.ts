@@ -63,9 +63,9 @@ export const POST = async (request: Request) => {
       await createCommunity(id, name, slug, logo_url || image_url, "org bio", created_by);
 
       return NextResponse.json({ message: "User created" }, { status: 201 });
-    } catch (err) {
+    } catch (err: any) {
       console.log(err);
-      return NextResponse.json({ message: "Internal Server Error" }, { status: 500 });
+      return NextResponse.json({ message: "Internal Server Error", error: err.errors }, { status: err.errors[2] });
     }
   }
 
