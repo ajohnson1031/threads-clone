@@ -40,7 +40,7 @@ export const POST = async (request: Request) => {
 
   // Activitate Webhook in the Clerk Dashboard.
   // After adding the endpoint, you'll see the secret on the right side.
-  const wh = new Webhook(process.env.NEXT_CLERK_WEBHOOK_SECRET || "");
+  const wh = new Webhook(process.env.NEXT_PUBLIC_CLERK_WEBHOOK_SECRET || "");
 
   let evnt: Event | null = null;
 
@@ -63,9 +63,9 @@ export const POST = async (request: Request) => {
       await createCommunity(id, name, slug, logo_url || image_url, "org bio", created_by);
 
       return NextResponse.json({ message: "User created" }, { status: 201 });
-    } catch (err: any) {
+    } catch (err) {
       console.log(err);
-      return NextResponse.json({ message: "Internal Server Error", error: err.errors }, { status: err.errors[2] });
+      return NextResponse.json({ message: "Internal Server Error" }, { status: 500 });
     }
   }
 
